@@ -33,7 +33,6 @@ addons:
       - libcairo2
       - libcairo2-dev
       - libffi-dev
-      - libgeos-dev
       - libgirepository1.0-dev
       - lmodern
       - fonts-freefont-otf
