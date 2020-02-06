@@ -33,7 +33,6 @@ addons:
       - libcairo2
       - libcairo2-dev
       - libffi-dev
-      - libgirepository1.0-dev
       - lmodern
       - fonts-freefont-otf
       - texlive-pictures
@@ -79,12 +78,9 @@ matrix:
         - EXTRAREQS='-r requirements/testing/travis36.txt'
     - python: 3.7
     - python: 3.7
+      arch: arm64
     - python: 3.8
     - python: "nightly"
-      env:
-        - PRE=--pre
-    - python: "nightly"
-      arch: arm64
       env:
         - PRE=--pre
     - os: osx
