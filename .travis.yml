@@ -146,6 +146,7 @@ install:
     # install appears to be successful but shared libraries cannot be loaded at
     # runtime, so an actual import is a better check).
     python -mpip install --upgrade pycairo cairocffi>=0.8
+    python -mpip install pytest-cov
     python -mpip install --upgrade PyGObject &&
       python -c 'import gi; gi.require_version("Gtk", "3.0"); from gi.repository import Gtk' &&
       echo 'PyGObject is available' ||
