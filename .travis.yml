@@ -24,6 +24,8 @@ addons:
     packages:
       - cm-super
       - dvipng
+      - libgeos-dev
+      - libgirepository1.0-dev
       - ffmpeg
       - gdb
       - gir1.2-gtk-3.0
