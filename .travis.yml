@@ -23,18 +23,6 @@ addons:
   apt:
     packages:
       - cm-super
-      - dvipng
-      - libgeos-dev
-      - libgirepository1.0-dev
-      - ffmpeg
-      - gdb
-      - gir1.2-gtk-3.0
-      - graphviz
-      - inkscape
-      - lcov
-      - libcairo2
-      - libcairo2-dev
-      - libffi-dev
       - lmodern
       - fonts-freefont-otf
       - texlive-pictures
@@ -47,6 +35,19 @@ addons:
       - texlive-luatex
       - texlive-xetex
       - ttf-wqy-zenhei
+      - dvipng
+      - libgeos-dev
+      - libgirepository1.0-dev
+      - ffmpeg
+      - gdb
+      - gir1.2-gtk-3.0
+      - graphviz
+      - inkscape
+      - lcov
+      - libcairo2
+      - libcairo2-dev
+      - libffi-dev
+      
 
 env:
   global:
