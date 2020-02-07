@@ -28,7 +28,7 @@ addons:
       - texlive-pictures
       - pkg-config
       - qtbase5-dev
-      - python-devel
+      - python-dev
       - texlive-fonts-recommended
       - texlive-latex-base
       - texlive-latex-extra
