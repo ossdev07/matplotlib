@@ -35,8 +35,8 @@ addons:
       - texlive-luatex
       - texlive-xetex
       - ttf-wqy-zenhei
-      - dvipng
       - libgeos-dev
+      - dvipng
       - libgirepository1.0-dev
       - ffmpeg
       - gdb
@@ -133,9 +133,6 @@ install:
     # Upgrade pip and setuptools and wheel to get as clean an install as possible.
     python -mpip install --upgrade pip setuptools wheel
   - |
-    # Install dependencies from PyPI.
-    python -mpip install --upgrade $PRE -r requirements/testing/travis_all.txt $EXTRAREQS $PINNEDVERS
-  - |
     # Install optional dependencies from PyPI.
     # Sphinx is needed to run sphinxext tests
     python -mpip install --upgrade sphinx
@@ -197,7 +194,8 @@ script:
     fi
 
 before_cache: |
-  rm -rf $HOME/.cache/matplotlib/tex.cache
+  rm -rf $HOME/.cache/matplotlib/
+  .cache
   rm -rf $HOME/.cache/matplotlib/test_cache
 
 after_failure: |
