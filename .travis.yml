@@ -125,7 +125,6 @@ before_install: |
     ;;
   esac
 
-
 install:
   - |
     # Setup environment.
