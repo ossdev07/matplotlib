@@ -144,7 +144,6 @@ install:
     # install appears to be successful but shared libraries cannot be loaded at
     # runtime, so an actual import is a better check).
     python -mpip install --upgrade pycairo cairocffi>=0.8
-    python -mpip install pytest-cov
     python -mpip install --upgrade PyGObject &&
       python -c 'import gi; gi.require_version("Gtk", "3.0"); from gi.repository import Gtk' &&
       echo 'PyGObject is available' ||
@@ -189,7 +188,7 @@ script:
       # The number of processes is hardcoded (-n2), because using too many
       # causes the Travis VM to run out of memory (since so many copies of
       # inkscape and ghostscript are running at the same time).
-      python -mpytest -raR --maxfail=50 --durations=25 --cov-report= --cov=lib --log-level=DEBUG
+      python -mpytest -raR --maxfail=50 --durations=25 --cov-report= --cov=lib -n2 --log-level=DEBUG
     fi
   - |
     if [[ $RUN_FLAKE8 == 1 ]]; then
