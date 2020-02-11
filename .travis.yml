@@ -190,7 +190,7 @@ script:
       # The number of processes is hardcoded (-n2), because using too many
       # causes the Travis VM to run out of memory (since so many copies of
       # inkscape and ghostscript are running at the same time).
-      python -mpytest -raR --maxfail=50 --durations=25 --cov-report= --cov=lib --log-level=DEBUG
+      python -mpytest -raR --maxfail=50 --durations=25 --cov-report= --cov=lib -n2 --log-level=DEBUG
     fi
   - |
     if [[ $RUN_FLAKE8 == 1 ]]; then
