@@ -197,8 +197,7 @@ script:
     fi
 
 before_cache: |
-  rm -rf $HOME/.cache/matplotlib/
-  .cache
+  rm -rf $HOME/.cache/matplotlib/tex.cache
   rm -rf $HOME/.cache/matplotlib/test_cache
 
 after_failure: |
