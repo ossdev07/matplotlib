@@ -260,8 +260,8 @@ if __name__ == '__main__':
         install_requires=[
             "cycler>=0.10",
             "kiwisolver>=1.0.1",
-            "numpy>=1.15",
-            "pillow>=6.2.0",
+            "numpy>=1.16.4",
+            "pillow>=6.2.1",
             "pyparsing>=2.0.1,!=2.0.4,!=2.1.2,!=2.1.6",
             "python-dateutil>=2.1",
         ],
