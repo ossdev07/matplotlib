@@ -133,6 +133,7 @@ install:
   - |
     # Install dependencies from PyPI.
     sudo python -mpip install --upgrade $PRE -r requirements/testing/travis_all.txt $EXTRAREQS $PINNEDVERS
+  - python -mpip install pytest-cov
   - |
     # Install optional dependencies from PyPI.
     # Sphinx is needed to run sphinxext tests
@@ -187,7 +188,7 @@ script:
       # The number of processes is hardcoded (-n2), because using too many
       # causes the Travis VM to run out of memory (since so many copies of
       # inkscape and ghostscript are running at the same time).
-      sudo python -mpytest -raR --maxfail=50 --timeout=300 --durations=25 --cov-report= --cov=lib -n2 --log-level=DEBUG
+      sudo python -mpytest -raR --maxfail=50 --durations=25 --cov-report= --cov=lib --log-level=DEBUG
     fi
   - |
     if [[ $RUN_FLAKE8 == 1 ]]; then
