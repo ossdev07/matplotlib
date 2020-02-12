@@ -36,6 +36,7 @@ addons:
       - libgeos-dev
       - libgirepository1.0-dev
       - lmodern
+      - python-dev
       - fonts-freefont-otf
       - texlive-pictures
       - pkg-config
