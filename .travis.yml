@@ -23,22 +23,7 @@ addons:
   apt:
     packages:
       - cm-super
-      - lmodern
-      - fonts-freefont-otf
-      - texlive-pictures
-      - pkg-config
-      - qtbase5-dev
-      - python-dev
-      - texlive-fonts-recommended
-      - texlive-latex-base
-      - texlive-latex-extra
-      - texlive-latex-recommended
-      - texlive-luatex
-      - texlive-xetex
-      - ttf-wqy-zenhei
-      - libgeos-dev
       - dvipng
-      - libgirepository1.0-dev
       - ffmpeg
       - gdb
       - gir1.2-gtk-3.0
@@ -47,7 +32,21 @@ addons:
       - lcov
       - libcairo2
       - libcairo2-dev
-      - libffi-dev     
+      - libffi-dev
+      - libgeos-dev
+      - libgirepository1.0-dev
+      - lmodern
+      - fonts-freefont-otf
+      - texlive-pictures
+      - pkg-config
+      - qtbase5-dev
+      - texlive-fonts-recommended
+      - texlive-latex-base
+      - texlive-latex-extra
+      - texlive-latex-recommended
+      - texlive-luatex
+      - texlive-xetex
+      - ttf-wqy-zenhei
 
 env:
   global:
@@ -80,9 +79,8 @@ matrix:
         - DELETE_FONT_CACHE=1
         - EXTRAREQS='-r requirements/testing/travis36.txt'
     - python: 3.7
-    - python: 3.7
-      arch: arm64
     - python: 3.8
+      arch: arm64
     - python: "nightly"
       env:
         - PRE=--pre
@@ -133,7 +131,7 @@ install:
     python -mpip install --upgrade pip setuptools wheel
   - |
     # Install dependencies from PyPI.
-    sudo python -mpip install --upgrade $PRE -r requirements/testing/travis_all.txt $EXTRAREQS $PINNEDVERS
+    python -mpip install --upgrade $PRE -r requirements/testing/travis_all.txt $EXTRAREQS $PINNEDVERS
   - |
     # Install optional dependencies from PyPI.
     # Sphinx is needed to run sphinxext tests
@@ -188,7 +186,7 @@ script:
       # The number of processes is hardcoded (-n2), because using too many
       # causes the Travis VM to run out of memory (since so many copies of
       # inkscape and ghostscript are running at the same time).
-      python -mpytest -raR --maxfail=50 --durations=25 --cov-report= --cov=lib -n2 --log-level=DEBUG
+      python -mpytest -raR --maxfail=50 --timeout=300 --durations=25 --cov-report= --cov=lib -n2 --log-level=DEBUG
     fi
   - |
     if [[ $RUN_FLAKE8 == 1 ]]; then
