@@ -133,30 +133,30 @@ install:
   - |
     # Install dependencies from PyPI.
     sudo python -mpip install --upgrade $PRE -r requirements/testing/travis_all.txt $EXTRAREQS $PINNEDVERS
-  - sudo python -mpip install pytest-cov
+  - python -mpip install pytest-cov
   - |
     # Install optional dependencies from PyPI.
     # Sphinx is needed to run sphinxext tests
-    sudo python -mpip install --upgrade sphinx
+    python -mpip install --upgrade sphinx
     # GUI toolkits are pip-installable only for some versions of Python so
     # don't fail if we can't install them.  Make it easier to check whether the
     # install was successful by trying to import the toolkit (sometimes, the
     # install appears to be successful but shared libraries cannot be loaded at
     # runtime, so an actual import is a better check).
-    sudo python -mpip install --upgrade pycairo cairocffi>=0.8
-    sudo python -mpip install --upgrade PyGObject &&
+    python -mpip install --upgrade pycairo cairocffi>=0.8
+    python -mpip install --upgrade PyGObject &&
       python -c 'import gi; gi.require_version("Gtk", "3.0"); from gi.repository import Gtk' &&
       echo 'PyGObject is available' ||
       echo 'PyGObject is not available'
-    sudo python -mpip install --upgrade pyqt5 &&
+    python -mpip install --upgrade pyqt5 &&
       python -c 'import PyQt5.QtCore' &&
       echo 'PyQt5 is available' ||
       echo 'PyQt5 is not available'
-    sudo python -mpip install --upgrade pyside2 &&
+    python -mpip install --upgrade pyside2 &&
       python -c 'import PySide2.QtCore' &&
       echo 'PySide2 is available' ||
       echo 'PySide2 is not available'
-    sudo python -mpip install --upgrade \
+    python -mpip install --upgrade \
       -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-14.04 \
       wxPython &&
       python -c 'import wx' &&
