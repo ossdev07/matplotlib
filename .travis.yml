@@ -37,7 +37,7 @@ addons:
       - libgeos-dev
       - libgirepository1.0-dev
       - lmodern
-      - python-dev
+      - python3-dev
       - fonts-freefont-otf
       - texlive-pictures
       - pkg-config
@@ -136,7 +136,7 @@ install:
     python -mpip install --upgrade pip setuptools wheel
   - |
     # Install dependencies from PyPI.
-    sudo python -mpip install --upgrade $PRE -r requirements/testing/travis_all.txt $EXTRAREQS $PINNEDVERS
+    /home/travis/virtualenv/python3.8.0/bin/python -mpip install --upgrade $PRE -r requirements/testing/travis_all.txt $EXTRAREQS $PINNEDVERS
   - python -mpip install pytest-cov
   - |
     # Install optional dependencies from PyPI.
@@ -192,7 +192,7 @@ script:
       # The number of processes is hardcoded (-n2), because using too many
       # causes the Travis VM to run out of memory (since so many copies of
       # inkscape and ghostscript are running at the same time).
-      python -mpytest -raR --maxfail=50 --durations=25 --cov-report= --cov=lib --log-level=DEBUG
+      /home/travis/virtualenv/python3.8.0/bin/python -mpytest -raR --maxfail=50 --durations=25 --cov-report= --cov=lib --log-level=DEBUG
     fi
   - |
     if [[ $RUN_FLAKE8 == 1 ]]; then
