@@ -80,7 +80,7 @@ matrix:
         - DELETE_FONT_CACHE=1
         - EXTRAREQS='-r requirements/testing/travis36.txt'
     - python: 3.7
-    - python: 3.8
+    - python: 2.7
       arch: arm64
     - python: "nightly"
       env:
@@ -136,7 +136,7 @@ install:
   - |
     # Install optional dependencies from PyPI.
     # Sphinx is needed to run sphinxext tests
-    python -mpip install --upgrade sphinx
+    sudo python -mpip install --upgrade sphinx
     # GUI toolkits are pip-installable only for some versions of Python so
     # don't fail if we can't install them.  Make it easier to check whether the
     # install was successful by trying to import the toolkit (sometimes, the
