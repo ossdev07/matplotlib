@@ -125,9 +125,7 @@ before_install: |
 
 install:
   - |
-    # Setup environment.
-    pip install --upgrade --user pip
-    
+    # Setup environment.    
     ccache -s
     git describe
     # Upgrade pip and setuptools and wheel to get as clean an install as possible.
@@ -135,7 +133,9 @@ install:
   - |
     # Install dependencies from PyPI.
     sudo python -mpip install --upgrade $PRE -r requirements/testing/travis_all.txt $EXTRAREQS $PINNEDVERS
-  - python -mpip install pytest-cov
+  - |
+    # INSTALLING TEST COVERAGE
+    python -mpip install pytest-cov
   - |
     # Install optional dependencies from PyPI.
     # Sphinx is needed to run sphinxext tests
@@ -172,7 +172,6 @@ install:
     fi
   - |
     python -mpip install -ve . # Install Matplotlib.
-    pip install --user "."
   - |
     if [[ $TRAVIS_OS_NAME != 'osx' ]] && [[ $RUN_PYTEST == 1 ]]; then
       unset CPPFLAGS
