@@ -80,7 +80,7 @@ matrix:
         - DELETE_FONT_CACHE=1
         - EXTRAREQS='-r requirements/testing/travis36.txt'
     - python: 3.7
-    - python: 2.7
+    - python: 3.8
       arch: arm64
     - python: "nightly"
       env:
@@ -125,18 +125,19 @@ before_install: |
 
 install:
   - |
-    # Setup environment.    
+    # Setup environment.
     ccache -s
     git describe
     # Upgrade pip and setuptools and wheel to get as clean an install as possible.
     python -mpip install --upgrade pip setuptools wheel
   - |
     # Install dependencies from PyPI.
-    sudo -H python -mpip install --upgrade $PRE -r requirements/testing/travis_all.txt $EXTRAREQS $PINNEDVERS
+    python -mpip install --upgrade $PRE -r requirements/testing/travis_all.txt $EXTRAREQS $PINNEDVERS
+  - python -mpip install pytest-cov
   - |
     # Install optional dependencies from PyPI.
     # Sphinx is needed to run sphinxext tests
-    sudo python -mpip install --upgrade sphinx
+    python -mpip install --upgrade sphinx
     # GUI toolkits are pip-installable only for some versions of Python so
     # don't fail if we can't install them.  Make it easier to check whether the
     # install was successful by trying to import the toolkit (sometimes, the
@@ -168,7 +169,7 @@ install:
       export CPPFLAGS=--coverage
     fi
   - |
-    python -mpip install -ve . # Install Matplotlib.
+    python -mpip install -ve .  # Install Matplotlib.
   - |
     if [[ $TRAVIS_OS_NAME != 'osx' ]] && [[ $RUN_PYTEST == 1 ]]; then
       unset CPPFLAGS
