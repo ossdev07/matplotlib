@@ -126,6 +126,8 @@ before_install: |
 install:
   - |
     # Setup environment.
+    pip install --upgrade --user pip
+    
     ccache -s
     git describe
     # Upgrade pip and setuptools and wheel to get as clean an install as possible.
@@ -169,7 +171,8 @@ install:
       export CPPFLAGS=--coverage
     fi
   - |
-    python -mpip install -ve .  # Install Matplotlib.
+    python -mpip install -ve . # Install Matplotlib.
+    pip install --user "."
   - |
     if [[ $TRAVIS_OS_NAME != 'osx' ]] && [[ $RUN_PYTEST == 1 ]]; then
       unset CPPFLAGS
