@@ -127,7 +127,7 @@ before_install: |
 install:
   - sudo which python
   - which python
-  - rm -rf /usr/bin/python
+  - sudo rm -rf /usr/bin/python
   - ln -s /home/travis/virtualenv/python3.8.0/bin/python /usr/bin/python
   - |
     # Setup environment.
