@@ -115,6 +115,7 @@ before_install: |
     brew install ffmpeg imagemagick mplayer ccache
     hash -r
     which python
+    sudo which python
     python --version
     set +e
     # We could install ghostscript and inkscape here to test svg and pdf
