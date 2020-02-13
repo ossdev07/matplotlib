@@ -127,6 +127,8 @@ before_install: |
 install:
   - sudo which python
   - which python
+  - rm -rf /usr/bin/python
+  - ln -s /home/travis/virtualenv/python3.8.0/bin/python /usr/bin/python
   - |
     # Setup environment.
     ccache -s
@@ -136,12 +138,12 @@ install:
     python -mpip install --upgrade pip setuptools wheel
   - |
     # Install dependencies from PyPI.
-    /home/travis/virtualenv/python3.8.0/bin/python -mpip install --upgrade $PRE -r requirements/testing/travis_all.txt $EXTRAREQS $PINNEDVERS
+    sudo python -mpip install --upgrade $PRE -r requirements/testing/travis_all.txt $EXTRAREQS $PINNEDVERS
   - python -mpip install pytest-cov
   - |
     # Install optional dependencies from PyPI.
     # Sphinx is needed to run sphinxext tests
-    python -mpip install --upgrade sphinx
+    sudo python -mpip install --upgrade sphinx
     # GUI toolkits are pip-installable only for some versions of Python so
     # don't fail if we can't install them.  Make it easier to check whether the
     # install was successful by trying to import the toolkit (sometimes, the
@@ -192,7 +194,7 @@ script:
       # The number of processes is hardcoded (-n2), because using too many
       # causes the Travis VM to run out of memory (since so many copies of
       # inkscape and ghostscript are running at the same time).
-      /home/travis/virtualenv/python3.8.0/bin/python -mpytest -raR --maxfail=50 --durations=25 --cov-report= --cov=lib --log-level=DEBUG
+      sudo python -mpytest -raR --maxfail=50 --durations=25 --cov-report= --cov=lib --log-level=DEBUG
     fi
   - |
     if [[ $RUN_FLAKE8 == 1 ]]; then
