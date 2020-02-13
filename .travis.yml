@@ -115,7 +115,6 @@ before_install: |
     brew install ffmpeg imagemagick mplayer ccache
     hash -r
     which python
-    sudo which python
     python --version
     set +e
     # We could install ghostscript and inkscape here to test svg and pdf
@@ -126,12 +125,14 @@ before_install: |
   esac
 
 install:
+  - sudo which python
   - |
     # Setup environment.
     ccache -s
     git describe
     # Upgrade pip and setuptools and wheel to get as clean an install as possible.
-    python -mpip install --upgrade pip setuptools wheel
+    pip install --upgrade pip setuptools wheel
+    #python -mpip install --upgrade pip setuptools wheel
   - |
     # Install dependencies from PyPI.
     python -mpip install --upgrade $PRE -r requirements/testing/travis_all.txt $EXTRAREQS $PINNEDVERS
