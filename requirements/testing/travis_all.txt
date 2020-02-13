@@ -2,7 +2,7 @@
 
 coverage
 cycler
-numpy
+numpy==1.15.0
 pillow
 pyparsing
 pytest!=4.6.0
