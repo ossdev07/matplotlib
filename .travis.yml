@@ -16,6 +16,7 @@ cache:
     - $HOME/.ccache  # https://github.com/travis-ci/travis-ci/issues/5853
     - $HOME/.cache/matplotlib
 
+
 addons:
   artifacts:
     paths:
@@ -36,6 +37,7 @@ addons:
       - libgeos-dev
       - libgirepository1.0-dev
       - lmodern
+      - python3-dev
       - fonts-freefont-otf
       - texlive-pictures
       - pkg-config
@@ -80,6 +82,7 @@ matrix:
         - EXTRAREQS='-r requirements/testing/travis36.txt'
     - python: 3.7
     - python: 3.8
+      arch: arm64
     - python: "nightly"
       env:
         - PRE=--pre
@@ -122,15 +125,20 @@ before_install: |
   esac
 
 install:
+  - sudo which python
+  - which python
+  - sudo rm -rf /usr/bin/python
+  - sudo ln -s /home/travis/virtualenv/python3.8.0/bin/python /usr/bin/python
   - |
     # Setup environment.
     ccache -s
     git describe
     # Upgrade pip and setuptools and wheel to get as clean an install as possible.
+    #pip install --upgrade pip setuptools wheel
     python -mpip install --upgrade pip setuptools wheel
   - |
     # Install dependencies from PyPI.
-    python -mpip install --upgrade $PRE -r requirements/testing/travis_all.txt $EXTRAREQS $PINNEDVERS
+    sudo python -mpip install --upgrade $PRE -r requirements/testing/travis_all.txt $EXTRAREQS $PINNEDVERS
   - |
     # Install optional dependencies from PyPI.
     # Sphinx is needed to run sphinxext tests
@@ -166,7 +174,7 @@ install:
       export CPPFLAGS=--coverage
     fi
   - |
-    python -mpip install -ve .  # Install Matplotlib.
+    sudo python -mpip install -ve .  # Install Matplotlib.
   - |
     if [[ $TRAVIS_OS_NAME != 'osx' ]] && [[ $RUN_PYTEST == 1 ]]; then
       unset CPPFLAGS
@@ -185,7 +193,7 @@ script:
       # The number of processes is hardcoded (-n2), because using too many
       # causes the Travis VM to run out of memory (since so many copies of
       # inkscape and ghostscript are running at the same time).
-      python -mpytest -raR --maxfail=50 --timeout=300 --durations=25 --cov-report= --cov=lib -n2 --log-level=DEBUG
+      sudo python -mpytest -raR --maxfail=50 --timeout=1000 --durations=25 --cov-report= --cov=lib -n2 --log-level=DEBUG
     fi
   - |
     if [[ $RUN_FLAKE8 == 1 ]]; then
@@ -209,4 +217,4 @@ after_success:
   - lcov --remove coverage.info --output-file coverage.info '/usr/*' '/home/travis/build/matplotlib/matplotlib/build/*' '/home/travis/build/matplotlib/matplotlib/extern/*' # filter system-files
   - lcov --list coverage.info
   # Uploading to CodeCov but excluding gcov reports
-  - bash <(curl -s https://codecov.io/bash) -f "!*.gcov" -X gcov -e TRAVIS_PYTHON_VERSION -y ci/codecov.yml|| echo "Codecov did not collect coverage reports"
+  - bash <(curl -s https://codecov.io/bash) -f "!*.gcov" -X gcov -e TRAVIS_PYTHON_VERSION|| echo "Codecov did not collect coverage reports"
