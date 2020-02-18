@@ -174,7 +174,7 @@ install:
       export CPPFLAGS=--coverage
     fi
   - |
-    python -mpip install -ve .  # Install Matplotlib.
+    sudo python -mpip install -ve .  # Install Matplotlib.
   - |
     if [[ $TRAVIS_OS_NAME != 'osx' ]] && [[ $RUN_PYTEST == 1 ]]; then
       unset CPPFLAGS
