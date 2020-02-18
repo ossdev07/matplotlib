@@ -129,7 +129,6 @@ install:
   - which python
   - sudo rm -rf /usr/bin/python
   - sudo ln -s /home/travis/virtualenv/python3.8.0/bin/python /usr/bin/python
-  #- sudo cp -r /home/travis/virtualenv/python3.8.0/bin/python /usr/bin/
   - |
     # Setup environment.
     ccache -s
@@ -194,7 +193,7 @@ script:
       # The number of processes is hardcoded (-n2), because using too many
       # causes the Travis VM to run out of memory (since so many copies of
       # inkscape and ghostscript are running at the same time).
-      sudo python -mpytest -raR --maxfail=50 --timeout=1000 --durations=25 --cov-report= --cov=lib -n2 --log-level=DEBUG
+      sudo python -mpytest -raR --maxfail=50 --timeout=300 --durations=25 --cov-report= --cov=lib -n2 --log-level=DEBUG
     fi
   - |
     if [[ $RUN_FLAKE8 == 1 ]]; then
