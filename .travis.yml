@@ -85,6 +85,7 @@ matrix:
         - EXTRAREQS='-r requirements/testing/travis_extra.txt'
     - python: 3.8
       arch: arm64
+      sudo: required
       env:
         - EXTRAREQS='-r requirements/testing/travis_extra.txt'
     - python: "nightly"
