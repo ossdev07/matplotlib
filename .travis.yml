@@ -171,7 +171,7 @@ install:
       echo 'wxPython is available' ||
       echo 'wxPython is not available'
 
-  # Set flag in a delayed manner to avoid issues with installing other packages
+  # Set flag in a delayed manner to avoid issues with installing other  packages
   - |
     if [[ $TRAVIS_OS_NAME != 'osx' ]] && [[ $RUN_PYTEST == 1 ]]; then
       export CPPFLAGS=--coverage
