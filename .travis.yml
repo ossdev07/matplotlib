@@ -135,8 +135,9 @@ install:
     ccache -s
     git describe
     # Upgrade pip and setuptools and wheel to get as clean an install as possible.
-    python -mpip install --user --upgrade pip setuptools wheel
+    python -mpip install --upgrade pip setuptools wheel
   - |
+    sudo chmod -R +x $HOME/.cache
     # Install dependencies from PyPI.
     python -mpip install --upgrade $PRE -r requirements/testing/travis_all.txt $EXTRAREQS $PINNEDVERS
   - |
