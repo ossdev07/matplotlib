@@ -81,14 +81,14 @@ matrix:
         - DELETE_FONT_CACHE=1
     - python: 3.7
       env:
-        - EXTRAREQS='-r requirements/testing/travis36.txt'
+        - EXTRAREQS='-r requirements/testing/travis_extra.txt'
     - python: 3.8
       env:
-        - EXTRAREQS='-r requirements/testing/travis36.txt'
+        - EXTRAREQS='-r requirements/testing/travis_extra.txt''
     - python: 3.8
       arch: arm64
       env:
-        - EXTRAREQS='-r requirements/testing/travis36.txt'
+        - EXTRAREQS='-r requirements/testing/travis_extra.txt'
     - python: "nightly"
       env:
         - PRE=--pre
@@ -133,8 +133,8 @@ before_install: |
 install:
   #- sudo which python
   #- which python
-  #- sudo rm -rf /usr/bin/python
-  #- sudo ln -s /home/travis/virtualenv/python3.8.0/bin/python /usr/bin/python
+  - sudo rm -rf /usr/bin/python
+  - sudo ln -s /home/travis/virtualenv/python3.8.0/bin/python /usr/bin/python
   - |
     # Setup environment.
     ccache -s
@@ -181,8 +181,8 @@ install:
       export CPPFLAGS=--coverage
     fi
   - |
-    #sudo python -mpip install -ve .  # Install Matplotlib.
-    python -mpip install -ve .
+    sudo python -mpip install -ve .  # Install Matplotlib.
+    #python -mpip install -ve .
   - |
     if [[ $TRAVIS_OS_NAME != 'osx' ]] && [[ $RUN_PYTEST == 1 ]]; then
       unset CPPFLAGS
@@ -201,8 +201,8 @@ script:
       # The number of processes is hardcoded (-n2), because using too many
       # causes the Travis VM to run out of memory (since so many copies of
       # inkscape and ghostscript are running at the same time).
-      #sudo python -mpytest -raR --maxfail=50 --timeout=10000 --durations=25 --cov-report= --cov=lib -n2 --log-level=DEBUG
-      python -mpytest -raR --maxfail=50 --timeout=10000 --durations=25 --cov-report= --cov=lib -n2 --log-level=DEBUG
+      sudo python -mpytest -raR --maxfail=50 --timeout=10000 --durations=25 --cov-report= --cov=lib -n2 --log-level=DEBUG
+      #python -mpytest -raR --maxfail=50 --timeout=10000 --durations=25 --cov-report= --cov=lib -n2 --log-level=DEBUG
     fi
   - |
     if [[ $RUN_FLAKE8 == 1 ]]; then
