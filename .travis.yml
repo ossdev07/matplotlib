@@ -131,8 +131,8 @@ before_install: |
   esac
 
 install:
-  #- sudo which python
-  #- which python
+  - sudo which python
+  - which python
   - sudo rm -rf /usr/bin/python
   - sudo ln -s /home/travis/virtualenv/python3.8.0/bin/python /usr/bin/python
   - |
