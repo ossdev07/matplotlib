@@ -79,16 +79,10 @@ matrix:
       env:
         - PINNEDVERS='-c requirements/testing/travis36minver.txt'
         - DELETE_FONT_CACHE=1
+        - EXTRAREQS='-r requirements/testing/travis36.txt'
     - python: 3.7
-      env:
-        - EXTRAREQS='-r requirements/testing/travis_extra.txt'
-    - python: 3.8
-      env:
-        - EXTRAREQS='-r requirements/testing/travis_extra.txt''
     - python: 3.8
       arch: arm64
-      env:
-        - EXTRAREQS='-r requirements/testing/travis_extra.txt'
     - python: "nightly"
       env:
         - PRE=--pre
@@ -145,7 +139,6 @@ install:
   - |
     # Install dependencies from PyPI.
     sudo python -mpip install --upgrade $PRE -r requirements/testing/travis_all.txt $EXTRAREQS $PINNEDVERS
-    #python -mpip install --upgrade $PRE -r requirements/testing/travis_all.txt $EXTRAREQS $PINNEDVERS
   - |
     # Install optional dependencies from PyPI.
     # Sphinx is needed to run sphinxext tests
@@ -182,7 +175,6 @@ install:
     fi
   - |
     sudo python -mpip install -ve .  # Install Matplotlib.
-    #python -mpip install -ve .
   - |
     if [[ $TRAVIS_OS_NAME != 'osx' ]] && [[ $RUN_PYTEST == 1 ]]; then
       unset CPPFLAGS
@@ -202,7 +194,6 @@ script:
       # causes the Travis VM to run out of memory (since so many copies of
       # inkscape and ghostscript are running at the same time).
       sudo python -mpytest -raR --maxfail=50 --timeout=10000 --durations=25 --cov-report= --cov=lib -n2 --log-level=DEBUG
-      #python -mpytest -raR --maxfail=50 --timeout=10000 --durations=25 --cov-report= --cov=lib -n2 --log-level=DEBUG
     fi
   - |
     if [[ $RUN_FLAKE8 == 1 ]]; then
